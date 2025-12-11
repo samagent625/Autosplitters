@@ -2,7 +2,7 @@
 //Script by Lox and NintenDude, Updated by SAM
 //Credit to daltone_21 and nintendude_sr for the SB logic to detect the nearest interactible object and the player position system
 //Credit to Sanic for the memory locations for Pause, MainMenu, and LoadingScreen
-//Credit to Arkham for the logic to add and remove text components to the livesplit and the player InZone logic
+//Credit to Arkham for the logic to add text components to the livesplit and the player InZone logic
 
 state ("fnaf9-Win64-Shipping"){}
 
@@ -208,6 +208,8 @@ init
 
     current.AutoSaveID = "";
     vars.wasLoadingScreen = false;
+    vars.onMenu = false;
+    vars.arcade = "N/A";
 
     if (vars.version == 1.13) {
         vars.Pause                       = new DeepPointer("fnaf9-Win64-Shipping.exe", 0x04F023C4);
@@ -249,6 +251,7 @@ init
     vars.InElevatorLoad = false;
     vars.DoorOpenTime = 0;
     vars.WaitingForDoors = false;
+    vars.StartingMopBots = 0;
     vars.CurrentMopBots = 0;
 
     vars.interactibleName = "";
@@ -283,13 +286,15 @@ init
         //Used to keep certain splits from repeating (reset)
         vars.CompletedSplits.Clear();
 
+        vars.StartingMopBots = vars.watchers["CollectedCautionBots"].Current;
         vars.CurrentMopBots = 0;
         vars.InElevatorLoad = false;
         vars.DoorOpenTime = 0;
         vars.WaitingForDoors = false;
         current.AutoSaveID = "";
         vars.wasLoadingScreen = false;
-        vars.LastWorldLoaded = "";
+        vars.onMenu = false;
+        vars.arcade = "N/A";
     });
 }
 
@@ -311,7 +316,6 @@ update
     var autosave = vars.FNameToString(current.LastAutoSaveID);
     if (!string.IsNullOrEmpty(autosave) && autosave != "None") current.AutoSaveID = autosave;
     
-    //print(vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Current));
     string currentName = vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Current);
     string currInteract = (string)vars.interactibleName;
     IntPtr currentAddress = vars.watchers["closestInteractibleAddress"].Current;
@@ -328,15 +332,12 @@ update
     }
 
     vars.SetText("MopBots:", vars.watchers["CollectedCautionBots"].Current);
+    vars.CurrentMopBots = vars.watchers["CollectedCautionBots"].Current;
 
     if ((current.AutoSaveID == "autosave_1_0") && (old.AutoSaveID != "autosave_1_0")) {
         vars.resetVariables();
         print("Reset variables");
     }
-
-    //print("X=" + vars.watchers["pos"].Current.X);
-    //print("Y=" + vars.watchers["pos"].Current.Y);
-    //print("Z=" + vars.watchers["pos"].Current.Z);
 }
 
 start
@@ -449,15 +450,12 @@ split
     }
 
     // MopBot Splits
-    if (settings["CollectedCautionBots"] && !vars.CompletedSplits.Contains("MopBot" + (vars.CurrentMopBots + 1)))
+    if (settings["CollectedCautionBots"] && !vars.CompletedSplits.Contains("MopBot" + (vars.CurrentMopBots - vars.StartingMopBots)))
     {
         var oldName = vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Old);
         var newName = vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Current);
-        if ((oldName.Contains("AR_HazardBot") || (oldName.Contains("AR_Barrier"))
-           && newName.Contains("None")
-           && (vars.watchers["CollectedCautionBots"].Current > vars.watchers["CollectedCautionBots"].Old))) {
-            vars.CurrentMopBots = vars.CurrentMopBots + 1;
-            vars.CompletedSplits.Add("MopBot" + vars.CurrentMopBots);
+        if ((oldName.Contains("AR_HazardBot") || oldName.Contains("AR_Barrier") || oldName.Contains("CautionBot_DLC")) && newName.Contains("None")) {
+            vars.CompletedSplits.Add("MopBot" + (vars.CurrentMopBots - vars.StartingMopBots));
             return true;
         }
     }
@@ -465,10 +463,15 @@ split
 
 isLoading
 {
-    // Normally MainMenu is set to 4, but if the runner is using the VentaBlack pak, the value is set to 2 instead.
-    if ((vars.watchers["mainMenu"].Current == 2) || (vars.watchers["mainMenu"].Current == 4)) {
+    if (vars.watchers["pos"].Current.Y == 0 && vars.arcade == "N/A") {
+        vars.onMenu = true;
+    } else if (current.World != "MAP_Title" || vars.arcade != "N/A") {
+        vars.onMenu = false;
+    }
+    if (vars.onMenu){
         return true;
     }
+
     if (vars.watchers["Pause"].Current == 3) {
         return true;
     }
