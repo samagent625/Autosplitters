@@ -33,12 +33,13 @@ startup
                 { "brazil", true, "Brazil Ending", "Endings" },
                 { "scooper", true, "Scooper Ending", "Endings" },
                 { "betrayal", true, "Betrayal Ending", "Endings" },
+            { "Items", false, "Collectible Splits", "Splits" },
+            { "CollectedCautionBots", false, "Mop Bots Splits", "Splits" },
             { "ScooperCameras", false, "Scooper Camera Splits", "Splits" },
                 { "camera1", false, "Chapter 1 Camera", "ScooperCameras" },
                 { "camera2", false, "Chapter 3 Camera", "ScooperCameras" },
                 { "camera3", false, "Chapter 5 Camera", "ScooperCameras" },
                 { "camera4", false, "Chapter 7 Camera", "ScooperCameras" },
-            { "CollectedCautionBots", false, "Mop Bots Splits", "Splits" },
             { "Arcades", false, "Arcade Splits", "Splits" },
                 { "CFF", false, "Chica's Feeding Frenzy Splits", "Arcades" },
                     { "Wave5", false, "Completed Wave 5", "CFF" },
@@ -55,59 +56,7 @@ startup
                     { "Hole7", false, "Completed Hole 7", "MGG" },
                     { "Hole8", false, "Completed Hole 8", "MGG" },
                     { "Hole9", false, "Completed Hole 9", "MGG" },
-            { "Items", false, "Collectible Splits", "Splits" },
-                { "RWItems", false, "Real World Collectibles", "Items" },
-                    { "Flashlight", false, "Flashlight", "RWItems" },
-                    { "Fazwrench", false, "Faz-Wrench", "RWItems" },
-                    { "RoxyTalky", false, "Roxy Talky", "RWItems" },
-                    { "VannyMask", false, "Security Mask", "RWItems" },
-                    { "ComicPage5", false, "Comic Page 5", "RWItems" },
-                    { "ComicPage2", false, "Comic Page 2", "RWItems" },
-                    { "ComicPage7", false, "Comic Page 7", "RWItems" },
-                    { "SpeakerBox", false, "Chica's Voicebox", "RWItems" },
-                    { "ComicPage4", false, "Comic Page 4", "RWItems" },
-                    { "ComicPage3", false, "Comic Page 3", "RWItems" },
-                    { "Faztoken1", false, "Faz-Token - Chapter 7", "RWItems" },
-                    { "ComicPage1", false, "Comic Page 1", "RWItems" },
-                    { "ComicPage6", false, "Comic Page 6", "RWItems" },
-                    { "Faztoken2", false, "Faz-Token - Chapter 8", "RWItems" },
-                    { "Faztoken3", false, "Faz-Token - Chapter 9", "RWItems" },
-                    { "Faztoken4", false, "Faz-Token - Chapter 9", "RWItems" },
-                    { "Faztoken5", false, "Faz-Token - Chapter 9", "RWItems" },
-                    { "Faztoken6", false, "Faz-Token - Chapter 9", "RWItems" },
-                    { "Faztoken7", false, "Faz-Token - Chapter 9", "RWItems" },
-                    { "ComicPage8", false, "Comic Page 8", "RWItems" },
-                { "ARItems", false, "AR Collectibles", "Items" },
-                    { "GlamMontyPlush", false, "AR Glam Monty Plush", "ARItems" },
-                    { "BonniePinata", false, "AR Bonnie Piñata", "ARItems" },
-                    { "TragedyMask", false, "AR Tragedy Mask", "ARItems" },
-                    { "NightmarePlush", false, "AR Nightmare Plush", "ARItems" },
-                    { "MoonPlush", false, "AR Moon Plush", "ARItems" },
-                    { "SunMask", false, "AR Sun Mask", "ARItems" },
-                    { "MoonPinata", false, "AR Moon Piñata", "ARItems" },
-                    { "SunPlush", false, "AR Sun Plush", "ARItems" },
-                    { "GoldenSun", false, "AR Golden Sun", "ARItems" },
-                    { "ComedyMask", false, "AR Comedy Mask", "ARItems" },
-                    { "GoldenMoon", false, "AR Golden Moon", "ARItems" },
-                    { "SunPinata", false, "AR Sun Piñata", "ARItems" },
-                    { "GlamChicaPlush", false, "AR Glam Chica Plush", "ARItems" },
-                    { "FoxyPlush", false, "AR Foxy Plush", "ARItems" },
-                    { "GlamBonniePlush", false, "AR Glam Bonnie Plush", "ARItems" },
-                    { "ChicaLunchbox", false, "AR Chica Lunchbox", "ARItems" },
-                    { "FoxyMask", false, "AR Foxy Mask", "ARItems" },
-                    { "GoldenFreddyPlush", false, "AR Golden Freddy Plush", "ARItems" },
-                    { "GlamRoxyPlush", false, "AR Glam Roxy Plush", "ARItems" },
-                    { "GoldenPlushbaby", false, "AR Golden Plushbaby", "ARItems" },
-                    { "MoonMask", false, "AR Moon Mask", "ARItems" },
-                    { "Plushbaby", false, "AR Plushbaby", "ARItems" },
-                    { "BonnieMask", false, "AR Bonnie Mask", "ARItems" },
-                    { "GoldenFoxy", false, "AR Golden Foxy", "ARItems" },
-                    { "GoldenBonnie", false, "AR Golden Bonnie", "ARItems" },
-                    { "HelpyPlush", false, "AR Helpy Plush", "ARItems" },
-                    { "GlamFreddyPlush", false, "AR Glam Freddy Plush", "ARItems" },
-                    { "FoxyLunchbox", false, "AR Foxy Lunchbox", "ARItems" },
-                    { "FreddyLunchbox", false, "AR Freddy Lunchbox", "ARItems" },
-                    { "BonnieLunchbox", false, "AR Bonnie Lunchbox", "ARItems" },
+        { "MopBotCountDisplay", false, "Display MopBot Count", null },
     };
 
     vars.Helper.Settings.Create(_settings);
@@ -359,11 +308,8 @@ init
     );
 
     vars.resetVariables = (Action)(() => {
-        //These 2 watchers are addresses which change while the game is running, and which change depending on what the player is interacting with.
-        //Make sure they are not garbage data when reading.
         vars.interactibleName = "";
         vars.watchers[0] = new MemoryWatcher<bool>((IntPtr)null){ Name = "lastInteractible" , FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull };
-        //vars.watchers[1] = new MemoryWatcher<bool>((IntPtr)null){ Name = "canCollect" , FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull };
 
         //Used to keep certain splits from repeating (reset)
         vars.CompletedSplits.Clear();
@@ -422,13 +368,13 @@ update
         vars.interactibleName = "";
     }
 
-    vars.SetText("MopBots:", vars.watchers["CollectedCautionBots"].Current);
+    if (settings["MopBotCountDisplay"]) vars.SetText("MopBots:", vars.watchers["CollectedCautionBots"].Current);
     vars.CurrentMopBots = vars.watchers["CollectedCautionBots"].Current;
 
     if ((current.AutoSaveID == "autosave_1_0") && (old.AutoSaveID != "autosave_1_0")) {
         vars.resetVariables();
-        print("Reset variables");
     }
+            
 }
 
 start
@@ -465,7 +411,7 @@ split
     {
         if (settings["vent_fall"] && !vars.CompletedSplits.Contains("vent_fall"))
         {
-            if (vars.InZone(vars.watchers["pos"].Current.X, vars.watchers["pos"].Current.Y, -34726.0f, -34620.0f, 41230.0f, 41234.0f))
+            if (vars.InZone(vars.watchers["pos"].Current.X, vars.watchers["pos"].Current.Y, -34730.0f, -34620.0f, 41230.0f, 41238.0f))
             {
                 vars.CompletedSplits.Add("vent_fall");
                 return true;
@@ -562,139 +508,12 @@ split
         var oldName = vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Old);
         var newName = vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Current);
         if ((oldName.Contains("AR_HazardBot") || oldName.Contains("AR_Barrier") || oldName.Contains("CautionBot_DLC")) && newName.Contains("None")) {
-            print("Deactivated MopBot " + (vars.CurrentMopBots - vars.StartingMopBots));
             vars.CompletedSplits.Add("MopBot" + (vars.CurrentMopBots - vars.StartingMopBots));
             return true;
         }
     }
-
     // Item Splits
-    if (settings["Items"] && (vars.watchers["itemCount"].Current > vars.watchers["itemCount"].Old)) {
-        //var oldName = vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Old);
-        //var newName = vars.GetNameFromFName(vars.watchers["closestInteractibleFName"].Current);
-        var currXPos = vars.watchers["pos"].Current.X;
-        var currYPos = vars.watchers["pos"].Current.Y;
-        var currZPos = vars.watchers["pos"].Current.Z;
-        if (settings["RWItems"] && (currZPos > 0.0f)) {
-            // Flashlight
-            if (vars.InZone(currXPos, currYPos, -6325.0f, -5725.0f, 21800.0f, 22550.0f) && settings["Flashlight"] && vars.CompletedSplits.Add("Flashlight")) return true;
-            // Roxy Talky
-            if (vars.InZone(currXPos, currYPos, -1200.0f, -800.0f, 27950.0f, 28400.0f) && settings["RoxyTalky"] && vars.CompletedSplits.Add("RoxyTalky")) return true;
-            // Faz-Wrench
-            if (vars.InZone(currXPos, currYPos, 4775.0f, 5125.0f, 29090.0f, 29500.0f) && settings["Fazwrench"] && vars.CompletedSplits.Add("Fazwrench")) return true;
-            // Security Mask
-            if (vars.InZone(currXPos, currYPos, -25825.0f, -25475.0f, 53400.0f, 53650.0f) && settings["VannyMask"] && vars.CompletedSplits.Add("VannyMask")) return true;
-            // Comic Page 5
-            if (vars.InZone(currXPos, currYPos, -29750.0f, -29050.0f, 53287.0f, 53987.0f) && settings["ComicPage5"] && vars.CompletedSplits.Add("ComicPage5")) return true;
-
-            // Comic Page 2
-            if (vars.InZone(currXPos, currYPos, -43880.0f, -43180.0f, 43810.0f, 44510.0f) && settings["ComicPage2"] && vars.CompletedSplits.Add("ComicPage2")) return true;
-
-            // Comic Page 7
-            if (vars.InZone(currXPos, currYPos, -46365.0f, -45665.0f, 53525.0f, 54225.0f) && settings["ComicPage7"] && vars.CompletedSplits.Add("ComicPage7")) return true;
-            // Speaker Box
-            if (vars.InZone(currXPos, currYPos, -48000.0f, -47000.0f, 56100.0f, 56500.0f) && settings["SpeakerBox"] && vars.CompletedSplits.Add("SpeakerBox")) return true;
-
-            // Comic Page 4
-            if (vars.InZone(currXPos, currYPos, -43900.0f, -43200.0f, 70285.0f, 70985.0f) && settings["ComicPage4"] && vars.CompletedSplits.Add("ComicPage4")) return true;
-
-            // Comic Page 3
-            if (vars.InZone(currXPos, currYPos, -43645.0f, -42945.0f, 79000.0f, 79700.0f) && settings["ComicPage3"] && vars.CompletedSplits.Add("ComicPage3")) return true;
-
-            // Faztoken 1
-            if (vars.InZone(currXPos, currYPos, -39730.0f, -39030.0f, 75250.0f, 75950.0f) && settings["Faztoken1"] && vars.CompletedSplits.Add("Faztoken1")) return true;
-            // Comic Page 1
-            if (vars.InZone(currXPos, currYPos, -41121.0f, -40700.0f, 70570.0f, 71270.0f) && settings["ComicPage1"] && vars.CompletedSplits.Add("ComicPage1")) return true;
-
-            // Comic Page 6
-            if (vars.InZone(currXPos, currYPos, -31586.0f, -30886.0f, 85903.0f, 86603.0f) && settings["ComicPage6"] && vars.CompletedSplits.Add("ComicPage6")) return true;
-            // Faztoken 2
-            if (vars.InZone(currXPos, currYPos, -33517.0f, -34217.0f, 85611.0f, 86311.0f) && settings["Faztoken2"] && vars.CompletedSplits.Add("Faztoken2")) return true;
-        } else if (settings["RWItems"]) {
-            // Faztoken 3
-            if (vars.InZone(currXPos, currYPos, 24525.0f, 25225.0f, 53400.0f, 53650.0f) && settings["Faztoken3"] && vars.CompletedSplits.Add("Faztoken3")) return true;
-            // Faztoken 4
-            if (vars.InZone(currXPos, currYPos, 24150.0f, 24850.0f, 53550.0f, 54250.0f) && settings["Faztoken4"] && vars.CompletedSplits.Add("Faztoken4")) return true;
-            // Faztoken 5
-            if (vars.InZone(currXPos, currYPos, 21093.0f, 21793.0f, 52944.0f, 53644.0f) && settings["Faztoken5"] && vars.CompletedSplits.Add("Faztoken5")) return true;
-            // Faztoken 6
-            if (vars.InZone(currXPos, currYPos, 21265.0f, 21965.0f, 54716.0f, 55416.0f) && settings["Faztoken6"] && vars.CompletedSplits.Add("Faztoken6")) return true;
-            // Faztoken 7
-            if (vars.InZone(currXPos, currYPos, 23600.0f, 24300.0f, 54650.0f, 55350.0f) && settings["Faztoken7"] && vars.CompletedSplits.Add("Faztoken7")) return true;
-            // Comic Page 8
-            if (vars.InZone(currXPos, currYPos, 19790.0f, 20490.0f, 54665.0f, 55365.0f) && settings["ComicPage8"] && vars.CompletedSplits.Add("ComicPage8")) return true;
-        }
-        if (settings["ARItems"] && (currZPos < -1500.0f)) {
-            // AR Glam Monty Plush
-            if (vars.InZone(currXPos, currYPos, -25400.0f, -24950.0f, 52750.0f, 53300.0f) && settings["GlamMontyPlush"] && vars.CompletedSplits.Add("GlamMontyPlush")) return true;
-            // AR Bonnie Piñata
-            else if (vars.InZone(currXPos, currYPos, -24700.0f, -24200.0f, 54850.0f, 55300.0f) && settings["BonniePinata"] && vars.CompletedSplits.Add("BonniePinata")) return true;
-            // AR Tragedy Mask
-            else if (vars.InZone(currXPos, currYPos, -29450.0f, -28750.0f, 58150.0f, 58850.0f) && settings["TragedyMask"] && vars.CompletedSplits.Add("TragedyMask")) return true;
-            // AR Nightmare Plush
-            else if (vars.InZone(currXPos, currYPos, -29900.0f, -29200.0f, 53300.0f, 54000.0f) && settings["NightmarePlush"] && vars.CompletedSplits.Add("NightmarePlush")) return true;
-            // AR Moon Plush
-            else if (vars.InZone(currXPos, currYPos, -24581.0f, -23881.0f, 37793.0f, 38493.0f) && settings["MoonPlush"] && vars.CompletedSplits.Add("MoonPlush")) return true;
-            // AR Sun Mask
-            else if (vars.InZone(currXPos, currYPos, -24650.0f, -23950.0f, 38400.0f, 39100.0f) && settings["SunMask"] && vars.CompletedSplits.Add("SunMask")) return true;
-            // AR Moon Piñata
-            else if (vars.InZone(currXPos, currYPos, -24209.0f, -23509.0f, 39150.0f, 39850.0f) && settings["MoonPinata"] && vars.CompletedSplits.Add("MoonPinata")) return true;
-
-            // AR Sun Plush
-            else if (vars.InZone(currXPos, currYPos, -26730.0f, -26030.0f, 42750.0f, 43450.0f) && settings["SunPlush"] && vars.CompletedSplits.Add("SunPlush")) return true;
-            // AR Golden Sun
-            else if (vars.InZone(currXPos, currYPos, -26820.0f, -26120.0f, 40010.0f, 40710.0f) && settings["GoldenSun"] && vars.CompletedSplits.Add("GoldenSun")) return true;
-            // AR Comedy Mask
-            else if (vars.InZone(currXPos, currYPos, -30060.0f, -29360.0f, 42720.0f, 43420.0f) && settings["ComedyMask"] && vars.CompletedSplits.Add("ComedyMask")) return true;
-            // AR Golden Moon
-            else if (vars.InZone(currXPos, currYPos, -26115.0f, -25415.0f, 37250.0f, 37950.0f) && settings["GoldenMoon"] && vars.CompletedSplits.Add("GoldenMoon")) return true;
-
-            // AR Sun Piñata
-            else if (vars.InZone(currXPos, currYPos, -43830.0f, -43130.0f, 44500.0f, 45200.0f) && settings["SunPinata"] && vars.CompletedSplits.Add("SunPinata")) return true;
-            // AR Glam Chica Plush
-            else if (vars.InZone(currXPos, currYPos, -39250.0f, -38550.0f, 45190.0f, 45890.0f) && settings["GlamChicaPlush"] && vars.CompletedSplits.Add("GlamChicaPlush")) return true;
-            // AR Foxy Plush
-            else if (vars.InZone(currXPos, currYPos, -46700.0f, -46000.0f, 48980.0f, 49680.0f) && settings["FoxyPlush"] && vars.CompletedSplits.Add("FoxyPlush")) return true;
-            // AR Glam Bonnie Plush
-            else if (vars.InZone(currXPos, currYPos, -48280.0f, -47580.0f, 52600.0f, 53300.0f) && settings["GlamBonniePlush"] && vars.CompletedSplits.Add("GlamBonniePlush")) return true;
-
-            // AR Chica Lunchbox
-            else if (vars.InZone(currXPos, currYPos, -47058.0f, -46358.0f, 56000.0f, 56700.0f) && settings["ChicaLunchbox"] && vars.CompletedSplits.Add("ChicaLunchbox")) return true;
-            // AR Foxy Mask
-            else if (vars.InZone(currXPos, currYPos, -48525.0f, -47825.0f, 54650.0f, 55350.0f) && settings["FoxyMask"] && vars.CompletedSplits.Add("FoxyMask")) return true;
-            // AR Golden Freddy Plush
-            else if (vars.InZone(currXPos, currYPos, -56300.0f, -55600.0f, 62991.0f, 63691.0f) && settings["GoldenFreddyPlush"] && vars.CompletedSplits.Add("GoldenFreddyPlush")) return true;
-
-            // AR Glam Roxy Plush
-            else if (vars.InZone(currXPos, currYPos, -46725.0f, -46025.0f, 77112.0f, 77812.0f) && settings["GlamRoxyPlush"] && vars.CompletedSplits.Add("GlamRoxyPlush")) return true;
-            // AR Golden Plushbaby
-            else if (vars.InZone(currXPos, currYPos, -43790.0f, -43090.0f, 76750.0f, 77450.0f) && settings["GoldenPlushbaby"] && vars.CompletedSplits.Add("GoldenPlushbaby")) return true;
-
-            // AR Moon Mask
-            else if (vars.InZone(currXPos, currYPos, -49600.0f, -48900.0f, 54850.0f, 55300.0f) && settings["MoonMask"] && vars.CompletedSplits.Add("MoonMask")) return true;
-            // AR Plushbaby
-            else if (vars.InZone(currXPos, currYPos, -44565.0f, -43865.0f, 79520.0f, 80220.0f) && settings["Plushbaby"] && vars.CompletedSplits.Add("Plushbaby")) return true;
-
-            // AR Bonnie Mask
-            else if (vars.InZone(currXPos, currYPos, -40660.0f, -40098.0f, 70950.0f, 71650.0f) && settings["BonnieMask"] && vars.CompletedSplits.Add("BonnieMask")) return true;
-            // AR Golden Foxy
-            else if (vars.InZone(currXPos, currYPos, -37515.0f, -36815.0f, 77291.0f, 77991.0f) && settings["GoldenFoxy"] && vars.CompletedSplits.Add("GoldenFoxy")) return true;
-            // AR Golden Bonnie
-            else if (vars.InZone(currXPos, currYPos, -32130.0f, -31430.0f, 73940.0f, 74640.0f) && settings["GoldenBonnie"] && vars.CompletedSplits.Add("GoldenBonnie")) return true;
-            // AR Helpy Plush
-            else if (vars.InZone(currXPos, currYPos, -32536.0f, -31836.0f, 69150.0f, 69850.0f) && settings["HelpyPlush"] && vars.CompletedSplits.Add("HelpyPlush")) return true;
-
-            // AR Glam Freddy Plush
-            else if (vars.InZone(currXPos, currYPos, -27050.0f, -26350.0f, 81950.0f, 82650.0f) && settings["GlamFreddyPlush"] && vars.CompletedSplits.Add("GlamFreddyPlush")) return true;
-            // AR Foxy Lunchbox
-            else if (vars.InZone(currXPos, currYPos, -26430.0f, -25730.0f, 84791.0f, 85491.0f) && settings["FoxyLunchbox"] && vars.CompletedSplits.Add("FoxyLunchbox")) return true;
-            // AR Freddy Lunchbox
-            else if (vars.InZone(currXPos, currYPos, -36545.0f, -35845.0f, 85465.0f, 86165.0f) && settings["FreddyLunchbox"] && vars.CompletedSplits.Add("FreddyLunchbox")) return true;
-
-            // AR Bonnie Lunchbox
-            else if (vars.InZone(currXPos, currYPos, -38490.0f, -37790.0f, 88470.0f, 89170.0f) && settings["BonnieLunchbox"] && vars.CompletedSplits.Add("BonnieLunchbox")) return true;
-        }
-    }
+    if (settings["Items"] && (vars.watchers["itemCount"].Current > vars.watchers["itemCount"].Old) && vars.CompletedSplits.Add("Item"+vars.watchers["itemCount"].Current)) return true;
 }
 
 isLoading
@@ -705,38 +524,21 @@ isLoading
         else if (vars.InZone(vars.watchers["pos"].Old.X, vars.watchers["pos"].Old.Y, -28050.0f, -27550.0f, 55900.0f, 56200.0f)) vars.arcade = "mgg";
     }
 
-    if (vars.watchers["pos"].Current.Y == 0 && vars.arcade == "N/A"){
-        if (!vars.onMenu){
-            print("Stop Timer On Menu");
-        }
-        vars.onMenu = true;
-    } else if (current.World != "MAP_Title" || vars.arcade != "N/A"){
-        vars.onMenu = false;
-    }
-    if (vars.onMenu){
-        return true;
-    }
+    if (vars.watchers["pos"].Current.Y == 0 && vars.arcade == "N/A") vars.onMenu = true;
+    else if (current.World != "MAP_Title" || vars.arcade != "N/A") vars.onMenu = false;
+    if (vars.onMenu) return true;
 
     if (vars.watchers["Pause"].Current == 3) {
         if ((vars.arcade == "cff") || (vars.arcade == "mgg")) {}
         else return true;
     }
-    if (vars.version == 1.13 && current.AutoSaveID == "PlaySequenceTrigger_LobbyEntranceDLC_Intro_Cinematic") {
-        if (vars.IntroCassieMovingTime == 0) vars.IntroCassieMovingTime = timer.CurrentTime.RealTime.Value.TotalSeconds;
-        if ((timer.CurrentTime.RealTime.Value.TotalSeconds - vars.IntroCassieMovingTime) < 30) return true;
-        if (!vars.hasStarted) {
-            if (vars.changingPos()) {
-                vars.hasStarted = true;
-                return false;
-            } else return true;
-        }
-    } else if (vars.version == 1.13) vars.IntroCassieMovingTime = 0;
     if (vars.watchers["loadingScreen"].Current == 1) {
         vars.arcade = "N/A";
         vars.wasLoadingScreen = true;
         return true;
     }
     if (vars.wasLoadingScreen) {
+        if (current.AutoSaveID == "PlaySequenceTrigger_LobbyEntranceDLC_Intro_Cinematic") return true;
         if (current.World == "MAP_World_DLC"
           && old.isMoving == false
           && current.isMoving == true) {
